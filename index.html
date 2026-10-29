@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<main class="app">
+
+    <!-- الشريط العلوي -->
+    <header class="top-bar">
+        <div class="theme-switch">
+            <button id="lightButton" type="button" title="Light mode">☀</button>
+            <button id="darkButton" type="button" title="Dark mode">☾</button>
+        </div>
+
+        <div class="brand">
+            <span class="brand-dot"></span>
+            SCIENTIFIC
+        </div>
+
+        <select id="angleMode" aria-label="Angle mode">
+            <option value="DEG">DEG</option>
+            <option value="RAD">RAD</option>
+        </select>
+    </header>
+
+    <!-- صفحة الحاسبة -->
+    <section id="calculatorPage" class="page">
+
+        <section class="display-panel">
+            <div class="display-heading">
+                <span>SCIENTIFIC MODE</span>
+                <span id="memoryIndicator">M</span>
+            </div>
+
+            <div id="resultPreview"></div>
+
+            <input
+                id="display"
+                type="text"
+                placeholder="0"
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Calculator display"
+            >
+
+            <div id="message" role="status"></div>
+        </section>
+
+        <!-- الأزرار العلمية -->
+        <section class="scientific-buttons">
+            <button data-value="10^" type="button">10ˣ</button>
+            <button data-value="sin(" type="button">sin</button>
+            <button data-value="cos(" type="button">cos</button>
+            <button data-value="tan(" type="button">tan</button>
+            <button data-value="sqrt(" type="button">√</button>
+
+            <button data-value="log(" type="button">log</button>
+            <button data-value="ln(" type="button">ln</button>
+            <button data-value="^" type="button">xʸ</button>
+            <button data-value="pi" type="button">π</button>
+            <button data-value="e" type="button">e</button>
+
+            <button data-value="(" type="button">(</button>
+            <button data-value=")" type="button">)</button>
+            <button data-value="^2" type="button">x²</button>
+            <button data-value="^-1" type="button">x⁻¹</button>
+            <button data-value="%" type="button">%</button>
+        </section>
+
+        <!-- الذاكرة والمسح في صف واحد -->
+        <section class="memory-buttons">
+            <button id="memoryMinus" class="memory-key" type="button">M−</button>
+            <button id="memoryPlus" class="memory-key" type="button">M+</button>
+            <button id="memoryClear" class="memory-key" type="button">MC</button>
+            <button id="memoryRecall" class="memory-key" type="button">MR</button>
+            <button id="deleteButton" class="danger-key" type="button">DEL</button>
+            <button id="clearButton" class="danger-key" type="button">AC</button>
+        </section>
+
+     <!-- لوحة الأرقام والعمليات -->
+<section class="number-pad">
+
+    <button data-value="7">7</button>
+    <button data-value="8">8</button>
+    <button data-value="9">9</button>
+    <button data-value="+">+</button>
+
+    <button data-value="4">4</button>
+    <button data-value="5">5</button>
+    <button data-value="6">6</button>
+    <button data-value="-">-</button>
+
+    <button data-value="1">1</button>
+    <button data-value="2">2</button>
+    <button data-value="3">3</button>
+    <button data-value="*">×</button>
+    <button id="answerButton">Ans</button>
+    <button data-value="0">0</button>
+    <button data-value=".">.</button>
+    <button data-value="/">÷</button>
+    <button class="last-button" data-value="00" type="button">00</button>
+    <button class="last-button" data-value="000" type="button">000</button>
+    <button id="equalsButton" class="equals-key">=</button>
+
+</section>
+
+        <div id="memoryStatus">M = 0</div>
+    </section>
+
+    <section id="basePage" class="page secondary-page" hidden>
+        <div class="page-heading">
+            <button class="back-button" data-page="calculatorPage" type="button">← Back</button>
+            <h2>Base Converter</h2>
+        </div>
+
+        <p class="page-description">تحويل الأعداد بين الأنظمة العددية المختلفة.</p>
+
+        <label for="baseInput">Number</label>
+        <input id="baseInput" type="text" placeholder="مثال: 1010" autocomplete="off">
+
+        <label for="baseFrom">From</label>
+        <select id="baseFrom">
+            <option value="2">Binary (BIN)</option>
+            <option value="8">Octal (OCT)</option>
+            <option value="10" selected>Decimal (DEC)</option>
+            <option value="16">Hexadecimal (HEX)</option>
+        </select>
+
+        <label for="baseTo">To</label>
+        <select id="baseTo">
+            <option value="2" selected>Binary (BIN)</option>
+            <option value="8">Octal (OCT)</option>
+            <option value="10">Decimal (DEC)</option>
+            <option value="16">Hexadecimal (HEX)</option>
+        </select>
+
+        <button id="convertBaseButton" class="convert-button" type="button">Convert</button>
+        <div id="baseResult" class="base-result">Result: —</div>
+    </section>
+
+    <!-- صفحة السجل -->
+    <section id="historyPage" class="page secondary-page" hidden>
+        <div class="page-heading">
+            <button class="back-button" data-page="calculatorPage" type="button">← Back</button>
+            <h2>History</h2>
+        </div>
+
+        <p class="page-description">العمليات الحسابية التي أجريتها.</p>
+
+        <button id="clearHistoryButton" class="danger-key clear-history" type="button">
+            Clear History
+        </button>
+
+        <div id="historyList">
+            <p class="empty-history">لا توجد عمليات بعد.</p>
+        </div>
+    </section>
+
+    <!-- التنقل السفلي -->
+    <footer class="bottom-controls">
+        <button id="calculatorButton" class="bottom-control active" type="button">
+            <span>▦</span> Calculator
+        </button>
+
+        <button id="baseButton" class="bottom-control" type="button">
+            <span>⇄</span> Base
+        </button>
+
+        <button id="historyButton" class="bottom-control" type="button">
+            <span>◷</span> History
+        </button>
+    </footer>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
