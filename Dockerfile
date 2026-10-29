@@ -1,8 +1,17 @@
 FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-COPY pom.xml .
-COPY src ./src
+COPY pom.xml ./
+COPY CalculatorController.java CalculatorService.java ExpressionParser.java Memory.java ScientificOperations.java ScientificcalculatorApplication.java ./
+
+RUN mkdir -p src/main/java/com/example/scientificcalculator
+RUN cp ./*.java src/main/java/com/example/scientificcalculator/
+
+RUN mkdir -p src/main/resources/static
+COPY index.html src/main/resources/static/
+COPY style.css src/main/resources/static/
+COPY script.js src/main/resources/static/
+COPY application.properties src/main/resources/
 
 RUN mvn -DskipTests package
 
@@ -11,6 +20,4 @@ WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 8080
-
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-8081} -jar app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
